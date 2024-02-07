@@ -1,8 +1,10 @@
 import { homeImageUrl, openApiTextCompleteUrl } from '@/constants/urls';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 
-export default async function POST(req: NextApiRequest, res: NextApiResponse) {
+export const dynamic = 'force-dynamic';
+
+export async function POST(req: NextRequest): Promise<NextResponse> {
   return new NextResponse(
     `<!DOCTYPE html>
       <html>

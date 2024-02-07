@@ -5,7 +5,7 @@ import {
 import { getCompletedText } from '@/services/openAi';
 import { supabase } from '../../../utils/supabaseClient';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import {
   errorImageUrl,
   homeAsPostUrl,
@@ -13,11 +13,13 @@ import {
   queryLimitExceededImageUrl,
 } from '@/constants/urls';
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
+export const dynamic = 'force-dynamic';
+
+export async function POST(req: NextRequest): Promise<NextResponse> {
   // Your logic for handling POST requests
   // Call OpenAI API
 
-  const body = req.body;
+  const body = await req.json();
 
   const { untrustedData, trustedData } = body;
   const { inputText, fid } = untrustedData;

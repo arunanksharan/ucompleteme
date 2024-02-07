@@ -1,7 +1,7 @@
 import { errorImageUrl, homeAsPostUrl } from '@/constants/urls';
 import { supabase } from '@/utils/supabaseClient';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import satori from 'satori';
 import sharp from 'sharp';
 import { join } from 'path';
@@ -14,10 +14,10 @@ console.log(fontData);
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: NextRequest): Promise<NextResponse> {
   // Read from database
 
-  const imageId = req.query.imageId;
+  const imageId = req.nextUrl.searchParams.get('imageId') as string;
   const { data, error } = await supabase
     .from('queries')
     .select('*')
