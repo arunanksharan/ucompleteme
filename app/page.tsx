@@ -19,7 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
       'fc:frame': 'vNext',
       'fc:frame:image': homeImageUrl,
       'fc:frame:post_url': openApiTextCompleteUrl,
-      'fc:frame:input:text': '',
+      'fc:frame:input:text': 'Enter Text Here',
       'fc:frame:button:1': 'Complete Me',
     },
   };

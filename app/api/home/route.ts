@@ -15,6 +15,7 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
           <meta name="fc:frame" content="vNext" />
           <meta name="fc:frame:image" content="${homeImageUrl}" />
           <meta name="fc:frame:post_url" content="${openApiTextCompleteUrl}" />
+          <meta name="fc:frame:input:text" content="Enter Text Here" />
           <meta name="fc:frame:button:1" content="Complete" />
         </head>
         <body><img src="/images/welcome.png" alt="welcome to ucomplteme"></img></body>
