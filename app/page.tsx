@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function Home() {
   return (
     <main className="">
-      <div>Text Completion</div>
+      <img src="/images/welcome.png" alt="welcome to ucomplteme"></img>
     </main>
   );
 }
