@@ -4,9 +4,14 @@ export enum OpenAIModel {
   GPT_3_5_TURBO = 'gpt-3.5-turbo',
 }
 
+export type MessageType = {
+  role: string;
+  content: string;
+};
+
 export interface IOpenAITextCompletionReqParams {
   temperature: number;
   max_tokens: number;
-  prompt: string;
   model: OpenAIModel;
+  messages: MessageType[];
 }

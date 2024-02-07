@@ -58,6 +58,8 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
       .select('*', { count: 'exact', head: true })
       .eq('fc_id', fid);
 
+    console.log('line 61 Inside userQueries:', userQueries);
+
     if (userQueries && userQueries.length >= 10) {
       return new NextResponse(
         `<!DOCTYPE html>
@@ -85,15 +87,33 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
     // fetch from openAI
     const openAiBody: IOpenAITextCompletionReqParams = {
       temperature: 0.7,
-      max_tokens: 15,
-      prompt: inputText,
-      model: OpenAIModel.GPT_4,
+      max_tokens: 50,
+      model: OpenAIModel.GPT_4_TURBO_PREVIEW,
+      messages: [
+        {
+          role: 'system',
+          content: 'You are a helpful assistant.',
+        },
+        {
+          role: 'user',
+          content: 'Who won the world series in 2020?',
+        },
+        {
+          role: 'assistant',
+          content: 'The Los Angeles Dodgers won the World Series in 2020.',
+        },
+        {
+          role: 'user',
+          content: inputText,
+        },
+      ],
     };
 
     const response = await getCompletedText(openAiBody);
+    console.log('line 58 Inside jobs:', response);
+
     const content = await response.choices[0].message.content.trim();
     console.log('line 57 Inside jobs:', content);
-    console.log('line 58 Inside jobs:', response);
 
     // Save this in supabase db
     const { data, error } = await supabase

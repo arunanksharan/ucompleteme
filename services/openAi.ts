@@ -14,5 +14,6 @@ export const getCompletedText = async (
     body: JSON.stringify(inputBody),
   });
   const data = await response.json();
+  console.log('line 35 data in openAi service', data);
   return data;
 };
