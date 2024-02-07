@@ -117,13 +117,13 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
 
     // Save this in supabase db
     const { data, error } = await supabase
-      .from('applications')
-      .insert([{ fc_id: fid, input_query: inputText, output_query: content }])
+      .from('queries')
+      .insert({ fc_id: fid, input_query: inputText, openai_response: content })
       .select();
     console.log('line 42 Inside text error:', {
       fc_id: fid,
       input_query: inputText,
-      output_query: content,
+      openai_response: content,
     });
 
     console.log('line 7448 Inside jobs data:', data);
