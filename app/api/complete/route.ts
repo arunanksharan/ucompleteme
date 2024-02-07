@@ -19,7 +19,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   // Your logic for handling POST requests
   // Call OpenAI API
 
+  console.log('line 22 req in /complete', req);
   const body = await req.json();
+  console.log('line 24 body', body);
 
   const { untrustedData, trustedData } = body;
   const { inputText, fid } = untrustedData;
