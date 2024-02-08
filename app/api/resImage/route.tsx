@@ -59,13 +59,33 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
           display: 'flex',
           width: '100%',
           height: '100%',
-          backgroundColor: '#f4f4f4',
-          padding: 50,
+          color: 'white',
+          backgroundColor: 'black',
+          padding: 30,
           lineHeight: 1.2,
           fontSize: 24,
         }}
       >
-        {openAiRes}
+        <div
+          style={{
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            display: 'flex',
+            width: '80%',
+            height: '80%',
+            // backgroundColor: '#000000',
+            color: 'white',
+            backgroundColor: 'black',
+            padding: 30,
+            lineHeight: 1.2,
+            fontSize: 24,
+            borderRadius: 10,
+            borderColor: 'white',
+            borderWidth: 1,
+          }}
+        >
+          {openAiRes}
+        </div>
       </div>,
       {
         width: 600,
