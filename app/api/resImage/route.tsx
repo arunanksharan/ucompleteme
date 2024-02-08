@@ -54,9 +54,9 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     const svg = await satori(
       <div
         style={{
-          justifyContent: 'flex-start',
-          alignItems: 'center',
           display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
           width: '100%',
           height: '100%',
           color: 'white',
@@ -68,9 +68,9 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
       >
         <div
           style={{
+            display: 'flex',
             justifyContent: 'flex-start',
             alignItems: 'center',
-            display: 'flex',
             width: '80%',
             height: '80%',
             // backgroundColor: '#000000',
@@ -104,10 +104,49 @@ export async function GET(req: NextRequest): Promise<NextResponse> {
     // Convert SVG to PNG using Sharp
     const pngBuffer = await sharp(Buffer.from(svg)).toFormat('png').toBuffer();
 
-    return new NextResponse(pngBuffer, {
+    // return new NextResponse(pngBuffer, {
+    //   status: 200,
+    //   headers: {
+    //     'Content-Type': 'image/png',
+    //     'Cache-Control': 'max-age=10',
+    //   },
+    // });
+    const htmlContent = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="Generated Image">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="fc:frame:post_url" content="${homeAsPostUrl}" />
+  <meta name="fc:frame:button:1" content="Home" />
+  <!-- Other meta tags -->
+  <title>Image</title>
+  <style>
+    /* CSS styles here */
+    body { 
+      background-color: black; 
+      margin: 0; /* Remove default margin */
+      min-height: 100vh; /* Full height */
+      display: flex; /* Use flex layout */
+      justify-content: center; /* Center horizontally */
+      align-items: center; /* Center vertically */
+    }
+  </style>
+</head>
+<body>
+  <div>
+  <img src="data:image/png;base64,${pngBuffer.toString(
+    'base64'
+  )}" alt="Generated Image">
+  </div>
+</body>
+</html>
+`;
+    return new NextResponse(htmlContent, {
       status: 200,
       headers: {
-        'Content-Type': 'image/png',
+        'Content-Type': 'text/html',
         'Cache-Control': 'max-age=10',
       },
     });
